@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.squareup.okhttp.Callback;
@@ -21,6 +23,14 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickDownloadButton();
+            }
+        });
     }
 
     private void onClickDownloadButton() {
@@ -39,9 +49,9 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.d("TEST", "Status-Code" + response.code());
-                Log.d("TEST", "Content-Length" + response.header("Content-Length"));
-                Log.d("TEST", "Content-Type" + response.header("Content-TYpe"));
+                Log.d("TEST", "Status-Code " + response.code());
+                Log.d("TEST", "Content-Length " + response.header("Content-Length"));
+                Log.d("TEST", "Content-Type " + response.header("Content-TYpe"));
                 Log.d("TEST", response.body().toString());
             }
         });
